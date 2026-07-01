@@ -1,18 +1,20 @@
-from pydantic import BaseModel, EmailStr
+from typing import Optional
+
+from pydantic import BaseModel, EmailStr, Field
 
 
 class UserCreate(BaseModel):
-    full_name: str
+    full_name: str = Field(..., min_length=3, max_length=100)
     email: EmailStr
-    phone: str
-    password: str
+    phone: Optional[str] = None
+    password: str = Field(..., min_length=8, max_length=100)
 
 
 class UserResponse(BaseModel):
     id: int
     full_name: str
     email: EmailStr
-    phone: str
+    phone: Optional[str]
     role: str
     is_verified: bool
 
