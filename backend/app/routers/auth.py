@@ -5,6 +5,8 @@ from app.database.session import get_db
 from app.schemas.user import UserCreate, UserResponse
 from app.schemas.token import LoginRequest, Token
 from app.services.auth_service import register_user, login_user
+from fastapi.security import OAuth2PasswordRequestForm
+
 
 
 router = APIRouter(
@@ -36,14 +38,14 @@ def register(
     response_model=Token
 )
 def login(
-    credentials: LoginRequest,
+    form_data: OAuth2PasswordRequestForm = Depends(),
     db: Session = Depends(get_db)
 ):
     try:
         return login_user(
             db=db,
-            email=credentials.email,
-            password=credentials.password
+            email=form_data.username,
+            password=form_data.password
         )
 
     except ValueError as e:

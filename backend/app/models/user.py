@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, Boolean, DateTime
 from sqlalchemy.sql import func
+from sqlalchemy.orm import relationship
 
 from app.database.base import Base
 
@@ -28,3 +29,9 @@ class User(Base):
         server_default=func.now(),
         onupdate=func.now()
     )
+
+    profile = relationship(
+        "UserProfile",
+        back_populates="user",
+        uselist=False
+)
