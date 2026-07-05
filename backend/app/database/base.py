@@ -5,3 +5,5 @@ Base = declarative_base()
 # Import all models AFTER Base is created
 from app.models.user import User
 from app.models.profile import UserProfile
+from app.models.education import Education
+from app.models.experience import Experience

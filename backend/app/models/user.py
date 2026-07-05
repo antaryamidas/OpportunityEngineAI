@@ -34,4 +34,19 @@ class User(Base):
         "UserProfile",
         back_populates="user",
         uselist=False
-)
+    )
+    educations = relationship(
+        "Education",
+        back_populates="user",
+        cascade="all, delete-orphan"
+    )
+    experiences = relationship(
+        "Experience",
+        back_populates="user",
+        cascade="all, delete-orphan"
+    )
+    skills = relationship(
+        "Skill",
+        back_populates="user",
+        cascade="all, delete-orphan"
+    )
